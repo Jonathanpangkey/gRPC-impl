@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package banking;
+
+option java_multiple_files = true;
+option java_package = "com.jonathan.bidirectional_streaming_grpc.proto";
+
+message ChatMessage {
+  string sender = 1;
+  string message = 2;
+}
+
+message ChatResponse {
+  string sender = 1;
+  string message = 2;
+}
+
+service ChatService {
+  rpc StartChat (stream ChatMessage) returns (stream ChatResponse) {}
+}

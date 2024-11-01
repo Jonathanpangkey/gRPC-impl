@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package banking;
+
+option java_multiple_files = true;
+option java_package = "com.jonathan.client_streaming_grpc.proto";
+
+message AddressProofRequest {
+  string account_holder_name = 1;
+  string account_number = 2;
+
+  bytes pdf_file = 3;
+}
+
+message AddressProofResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service BankService {
+  rpc UploadAddressProof(stream AddressProofRequest) returns (AddressProofResponse) {}
+}

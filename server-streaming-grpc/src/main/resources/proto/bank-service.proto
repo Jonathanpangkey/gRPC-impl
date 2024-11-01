@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package banking;
+
+option java_multiple_files = true;
+option java_package = "com.jonathan.server_streaming_grpc.proto";
+
+message AccountRequest {
+  string account_number = 1;
+  int32 duration_in_days = 2;
+}
+
+message TransactionDetail {
+  string transaction_id = 1;
+  string transaction_type = 2;
+  float transaction_amount = 3;
+}
+
+message TransactionDetailList {
+  repeated TransactionDetail transaction_details = 1;
+}
+
+service TransactionService {
+  rpc streamTransactions(AccountRequest) returns (stream TransactionDetailList);
+}
